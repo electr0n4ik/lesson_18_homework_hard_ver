@@ -3,7 +3,7 @@
 
 # Например
 
-# class BookDAO:
-#     def get_all_books(self):
-#         books = Book.query.all()
-#         return
+class BookDAO:
+    def get_all_books(self):
+        books = Book.query.all()
+        return
