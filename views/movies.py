@@ -32,12 +32,6 @@ class MovieView(Resource):
 
         return "", 204
 
-    def patch(self, mid):
-        req_json = request.json
-        req_json["id"] = mid
-
-        movie_dao.update_partial(req_json)
-        return "", 204
 
     def delete(self, mid: int):
         movie_dao.delete(mid)

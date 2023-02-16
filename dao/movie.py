@@ -20,9 +20,15 @@ class MovieDAO:
         """
         return self.session.query(Movie).get(mid)
 
+    def get_by_args(self, **args):
+        """
+        Метод для получения всех фильмов по выбранным параметрам
+        """
+        return self.session.query(Movie).filter_by(**args).all()
+
     def create(self, data):
         """
-        Добавление.
+        Создание фильма.
         """
         movie = Movie(**data)
 
@@ -32,7 +38,7 @@ class MovieDAO:
         return movie
     def update(self, data):
         """
-        Изменение.
+        Изменение информации о фильме.
         """
         mid = data.get("id")
         movie = self.get_one(mid)
@@ -40,21 +46,10 @@ class MovieDAO:
 
         return movie
 
-    def update_partial(self, data):
-        mid = data.get("id")
-        movie = self.get_one(mid)
-
-        if "title" in data:
-            movie.title = data.get("title")
-
-        self.session.add(movie)
-        self.session.commit()
-
-        return movie
 
     def delete(self, mid):
         """
-        Удаление.
+        Удаление фильма.
         """
         movie = self.get_one(mid)
         self.session.delete(movie)
