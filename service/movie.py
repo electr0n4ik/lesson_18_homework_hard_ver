@@ -28,11 +28,18 @@ class MovieService:
         """
         return self.movie_dao.create(**data)
 
-    def update(self, mid, data):
+    def update(self, mid, **data):
         """
         Обновление информации о фильме
         """
         return self.movie_dao.update(mid, **data)
+
+
+    def get_by_args(self, args):
+        """
+        Метод для получения всех фильмов по выбранным параметрам
+        """
+        return self.movie_dao.get_by_args(**args)
 
 
     def delete(self, mid):
