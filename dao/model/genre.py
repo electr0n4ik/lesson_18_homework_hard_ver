@@ -9,5 +9,8 @@ class Genre(db.Model):
 
 
 class GenreSchema(Schema):
+    """
+    Схема для сериализации данных жанра
+    """
     id = fields.Int(dump_only=True)
     name = fields.Str()

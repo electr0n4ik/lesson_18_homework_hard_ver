@@ -20,6 +20,9 @@ class Movie(db.Model):
 
 
 class MovieSchema(Schema):
+    """
+    Схема для сериализации данных фильма
+    """
     id = fields.Int()
     title = fields.Str()
     description = fields.Str()

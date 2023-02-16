@@ -8,5 +8,8 @@ class Director(db.Model):
 
 
 class DirectorSchema(Schema):
+    """
+    Схема для сериализации данных режиссера
+    """
     id = fields.Int(dump_only=True)
     name = fields.Str()

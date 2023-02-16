@@ -3,7 +3,7 @@ from dao.model.movie import MovieSchema
 from dao.movie import MovieDAO
 from service.movie import MovieService
 
-#from dao.model.director import DirectorSchema
+from dao.model.director import DirectorSchema
 from dao.director import DirectorDAO
 from service.director import DirectorService
 
@@ -15,4 +15,4 @@ movie_service = MovieService(dao=movie_dao)
 
 director_dao = DirectorDAO(db.session)
 director_schema = DirectorSchema(many=True)
-director_service = DirectorService(dao=movie_dao)
+director_service = DirectorService(dao=director_dao)

@@ -2,43 +2,43 @@
 # Сюда импортируются сервисы из пакета service
 from flask import request
 from flask_restx import Resource, Namespace
-from implemented import director_dao, director_schema
+from implemented import movie_dao, movie_schema
 
-director_ns = Namespace('directors')
+movie_ns = Namespace('movies')
 
-@director_ns.route('/')
-class DirectorsView(Resource):
+@movie_ns.route('/')
+class MoviesView(Resource):
     def get(self):
-        all_directors = director_dao.get_all()
-        return director_schema.dump(all_directors), 200
+        all_movies = movie_dao.get_all()
+        return movie_schema.dump(all_movies), 200
 
     def post(self):
         req_json = request.json
-        director_dao.create(req_json)
+        movie_dao.create(req_json)
         return "", 201
 
 
-@director_ns.route('/<int:did>')
-class DirectorView(Resource):
-    def get(self, did: int):
-        director = director_dao.get_one(did)
-        return director_schema.dump(director), 200
+@movie_ns.route('/<int:mid>')
+class MovieView(Resource):
+    def get(self, mid: int):
+        movie = movie_dao.get_one(mid)
+        return movie_schema.dump(movie), 200
 
-    def put(self, did):
+    def put(self, mid):
         req_json = request.json
-        req_json["id"] = did
+        req_json["id"] = mid
 
-        director_dao.update(req_json)
+        movie_dao.update(req_json)
 
         return "", 204
 
-    def patch(self, did):
+    def patch(self, mid):
         req_json = request.json
-        req_json["id"] = did
+        req_json["id"] = mid
 
-        director_dao.update_partial(req_json)
+        movie_dao.update_partial(req_json)
         return "", 204
 
-    def delete(self, did: int):
-        director_dao.delete(did)
+    def delete(self, mid: int):
+        movie_dao.delete(mid)
         return "", 204

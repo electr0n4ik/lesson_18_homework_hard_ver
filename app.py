@@ -20,12 +20,12 @@ def register_extensions(app):
 
 
 # функция создания основного объекта app
-def create_app(config: Config):
+def create_app(config):
     """
     Создание приложения
     """
     app = Flask(__name__)
-    app.config.from_object(сonfig)
+    app.config.from_object(config)
     register_extensions(app)
     return app
 
