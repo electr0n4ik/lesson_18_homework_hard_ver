@@ -14,3 +14,6 @@ six==1.16.0
 typing-extensions==3.10.0.2
 Werkzeug==2.0.2
 zipp==3.6.0
+
+config~=0.5.1
+marshmallow~=3.13.0
