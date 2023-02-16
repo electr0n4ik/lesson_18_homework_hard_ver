@@ -6,18 +6,9 @@ from flask import Flask
 from flask_restx import Api
 from config import Config
 from setup_db import db
+from views.directors import director_ns
+from views.genres import genre_ns
 from views.movies import movie_ns
-
-# функция подключения расширений (Flask-SQLAlchemy, Flask-RESTx, ...)
-def register_extensions(app):
-    """
-    Конфигурация приложения
-    """
-    db.init_app(app)
-    api = Api(app)
-    api.add_namespace(movie_ns)
-    create_data(app, db)
-
 
 # функция создания основного объекта app
 def create_app(config):
@@ -30,19 +21,21 @@ def create_app(config):
     return app
 
 
-# функция
-def create_data(app, db):
-    with app.app_context():
-        db.create_all()
-#
-#         создание нескольких сущностей, чтобы добавить их в БД
-#
-        # with db.session.begin():
-        #     db.session.add_all(здесь список созданных объектов)
-#
-#
-app = create_app(Config())
-app.debug = True
+# функция подключения расширений (Flask-SQLAlchemy, Flask-RESTx, ...)
+def register_extensions(app):
+    """
+    Конфигурация приложения
+    """
+    db.init_app(app)
+    api = Api(app)
+    api.add_namespace(movie_ns)
+    api.add_namespace(director_ns)
+    api.add_namespace(genre_ns)
+
+
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=10001, debug=True)
+    app_config = Config()
+    app = create_app(app_config)
+    create_app(app)
+    app.run(host="localhost", debug=True)

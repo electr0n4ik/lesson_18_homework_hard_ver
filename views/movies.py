@@ -7,6 +7,7 @@ from implemented import movie_dao, movie_schema, movie_service
 
 movie_ns = Namespace('movies')
 
+
 @movie_ns.route('/')
 class MoviesView(Resource):
     def get(self):

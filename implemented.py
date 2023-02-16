@@ -15,12 +15,12 @@ from setup_db import db
 
 movie_dao = MovieDAO(db.session)
 movie_schema = MovieSchema(many=True)
-movie_service = MovieService(dao=movie_dao)
+movie_service = MovieService(movie_dao)
 
 director_dao = DirectorDAO(db.session)
 director_schema = DirectorSchema(many=True)
-director_service = DirectorService(dao=director_dao)
+director_service = DirectorService(director_dao)
 
 genre_dao = GenreDAO(db.session)
 genre_schema = GenreSchema(many=True)
-genre_service = GenreService(dao=genre_dao)
+genre_service = GenreService(genre_dao)
