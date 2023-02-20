@@ -3,7 +3,7 @@
 import flask
 from flask import request
 from flask_restx import Resource, Namespace
-from implemented import movie_service, movie_schema
+from implemented import movie_service, movie_schema, movies_schema
 
 movie_ns = Namespace('movies')
 
@@ -14,8 +14,13 @@ class MoviesView(Resource):
         """
         Метод для получения всех фильмов
         """
-        all_movies = movie_service.get_all()
-        return movie_schema.dump(all_movies), 200
+        args = flask.request.args
+        if len(args):
+            movies = movie_service.get_by_args(args)
+            return movies_schema.dump(movies), 200
+        else:
+            all_movies = movie_service.get_all()
+            return movies_schema.dump(all_movies), 200
 
     def post(self):
         req_json = request.json
@@ -26,6 +31,7 @@ class MoviesView(Resource):
 @movie_ns.route('/<int:mid>')
 class MovieView(Resource):
     def get(self, mid):
+
         movie = movie_service.get_one(mid)
         return movie_schema.dump(movie), 200
 

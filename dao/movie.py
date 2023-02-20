@@ -21,11 +21,12 @@ class MovieDAO:
         """
         return self.session.query(Movie).get(mid)
 
-    # def get_by_args(self, **args):
-    #     """
-    #     Метод для получения всех фильмов по выбранным параметрам
-    #     """
-    #     return self.session.query(Movie).filter_by(**args).all()
+    def get_by_args(self, **args):
+        """
+        Метод для получения всех фильмов по выбранным параметрам
+        """
+        print(self.session.query(Movie).filter_by(**args).all())
+        return self.session.query(Movie).filter_by(**args).all()
 
     def create(self, data):
         """
