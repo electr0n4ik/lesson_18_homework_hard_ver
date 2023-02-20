@@ -13,6 +13,7 @@ def create_app(config):
     """
     application = Flask(__name__)
     application.config.from_object(config)
+    # application.config['JSON_AS_ASCII'] = False
     application.app_context().push()
     register_extensions(application)
     return application
@@ -24,6 +25,7 @@ def register_extensions(application):
     """
     db.init_app(application)
     api = Api(application)
+
     api.add_namespace(movie_ns)
     api.add_namespace(director_ns)
     api.add_namespace(genre_ns)
@@ -36,5 +38,5 @@ def create_data(app, db):
 
 if __name__ == '__main__':
     app = create_app(Config)
-
-    app.run(host="localhost", port=10001, debug=True)
+    # app.config['JSON_AS_ASCII'] = False
+    app.run(port=10001, debug=True)

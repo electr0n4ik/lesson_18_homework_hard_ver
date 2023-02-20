@@ -20,6 +20,7 @@ class MoviesView(Resource):
             return movies_schema.dump(movies), 200
         else:
             all_movies = movie_service.get_all()
+
             return movies_schema.dump(all_movies), 200
 
     def post(self):
