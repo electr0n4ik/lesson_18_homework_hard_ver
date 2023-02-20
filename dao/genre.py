@@ -3,7 +3,7 @@
 
 from dao.model.genre import Genre
 
-# CRUD
+
 class GenreDAO:
     def __init__(self, session):
         self.session = session

@@ -3,7 +3,7 @@
 
 from dao.model.director import Director
 
-# CRUD
+
 class DirectorDAO:
     def __init__(self, session):
         self.session = session

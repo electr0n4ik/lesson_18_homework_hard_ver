@@ -5,6 +5,7 @@ from dao.model.director import DirectorSchema
 from dao.model.genre import GenreSchema
 from setup_db import db
 
+
 class Movie(db.Model):
     __tablename__ = "movie"
     id = db.Column(db.Integer, primary_key=True)
@@ -29,5 +30,5 @@ class MovieSchema(Schema):
     trailer = fields.Str()
     year = fields.Int()
     rating = fields.Float()
-    director = fields.Pluck(DirectorSchema, 'name')
-    genre = fields.Pluck(GenreSchema, 'name')
+    # director = fields.Pluck(DirectorSchema, 'name')
+    # genre = fields.Pluck(GenreSchema, 'name')

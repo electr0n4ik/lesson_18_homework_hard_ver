@@ -3,6 +3,7 @@
 
 from dao.model.movie import Movie
 
+
 # CRUD
 class MovieDAO:
     def __init__(self, session):
@@ -20,32 +21,35 @@ class MovieDAO:
         """
         return self.session.query(Movie).get(mid)
 
-    def get_by_args(self, **args):
-        """
-        Метод для получения всех фильмов по выбранным параметрам
-        """
-        return self.session.query(Movie).filter_by(**args).all()
+    # def get_by_args(self, **args):
+    #     """
+    #     Метод для получения всех фильмов по выбранным параметрам
+    #     """
+    #     return self.session.query(Movie).filter_by(**args).all()
 
     def create(self, data):
         """
         Создание фильма.
         """
-        movie = Movie(**data)
+        movie = Movie(data)
 
         self.session.add(movie)
         self.session.commit()
 
         return movie
+
     def update(self, data):
         """
         Изменение информации о фильме.
         """
-        mid = data.get("id")
+        mid = data.pop("id")
         movie = self.get_one(mid)
-        movie.title = data.get("title")
+        for field_name, field_value in data.items():
+            setattr(movie, field_name, field_value)
+        self.session.add(movie)
+        self.session.commit()
 
         return movie
-
 
     def delete(self, mid):
         """
@@ -53,4 +57,4 @@ class MovieDAO:
         """
         movie = self.get_one(mid)
         self.session.delete(movie)
-        self.commit()
+        self.session.commit()
